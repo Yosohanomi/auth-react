@@ -8,8 +8,10 @@ export const login =  createAsyncThunk(
     async (credentials, {rejectWithValue})=> {
         try {
             const response = await authApi.post(beckendRoutes.loginRoute, credentials)
+            console.log(response?.data);
         } catch (error) {
-            return rejectWithValue ('ой щось пішло не так');
+            console.log(error);
+            return rejectWithValue(error?.response?.data)
         }
         
     }
@@ -17,11 +19,11 @@ export const login =  createAsyncThunk(
 export const refresh = createAsyncThunk (
     "users/refresh", async (_, {rejectWithValue})=> {
         try {
-            const result = await authApi.post(beckendRoutes.refreshRouta)
-            return result.data
+            const response = await authApi.post(beckendRoutes.refreshRouta)
+            return response.data
         }
      catch (error) {
-        return rejectWithValue("ой щось пішло не так")
+        return rejectWithValue(error?.response?.data)
     }
 })
 
@@ -30,10 +32,9 @@ export const refresh = createAsyncThunk (
 export const logout = createAsyncThunk (
     "users/logout", async (_, {rejectWithValue})=> {
         try {
-            const result = await authApi.post(beckendRoutes.logoutRoute)
-            return result.data
+            await authApi.post(beckendRoutes.logoutRoute)
         }
      catch (error) {
-        return rejectWithValue("ой щось пішло не так")
+        return rejectWithValue(error?.response?.data)
     }
 })

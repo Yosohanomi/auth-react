@@ -6,7 +6,7 @@ export const authApi = axios.create({
     withCredentials: true //!!! Важливо для куків
 })
 
-auth.interceptors.request.use((config) => {
+authApi.interceptors.request.use((config) => {
     const token = store?.getState().auth.accessToken;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
