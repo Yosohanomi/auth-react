@@ -8,7 +8,7 @@ export const login =  createAsyncThunk(
     async (credentials, {rejectWithValue})=> {
         try {
             const response = await authApi.post(beckendRoutes.loginRoute, credentials)
-            console.log(response?.data);
+            return response.data;
         } catch (error) {
             console.log(error);
             return rejectWithValue(error?.response?.data)
@@ -33,6 +33,7 @@ export const logout = createAsyncThunk (
     "users/logout", async (_, {rejectWithValue})=> {
         try {
             await authApi.post(beckendRoutes.logoutRoute)
+            return
         }
      catch (error) {
         return rejectWithValue(error?.response?.data)

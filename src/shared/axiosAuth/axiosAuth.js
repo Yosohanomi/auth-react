@@ -1,8 +1,9 @@
 import axios from "axios";
 import { baseUrl } from "../../app/baseUrl/baseUrl";
+import { store } from "../../app/store/store";
 
 export const authApi = axios.create({
-    baseUrl: baseUrl,
+    baseURL: baseUrl,
     withCredentials: true //!!! Важливо для куків
 })
 
